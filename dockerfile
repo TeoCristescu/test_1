@@ -1,5 +1,5 @@
 FROM golang:alpine AS Builder
-WORKDIR /ex_yt
+WORKDIR /ex_yt 
 COPY helloworld.go .
 RUN GOOS=linux go build -a -installsuffix cgo -o helloworld .
 
