@@ -12,4 +12,3 @@ WORKDIR /root
 
 COPY --from=Builder /ex_yt/helloworld .
 CMD ["./helloworld"]
-
