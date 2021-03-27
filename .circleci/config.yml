@@ -5,7 +5,7 @@ executors:
       IMAGE_NAME: teocristescu/test_circleci
     docker:
       - image: circleci/buildpack-deps:stretch
-      auth:
+      - auth:
           username: $DOCKERHUB_USERNAM
           password: $DOCKERHUB_PASS  
 jobs:
