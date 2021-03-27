@@ -7,7 +7,7 @@ executors:
       - image: circleci/buildpack-deps:stretch
 jobs:
   build:
-    executor: docker-publisher
+    executor: docker-publisher  
     steps:
       - checkout
       - setup_remote_docker
@@ -35,7 +35,9 @@ jobs:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            IMAGE_TAG="0.0.${CIRCLE_BUILD_NUM}"
             docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
+            docker push $IMAGE_NAME:latest
             docker push $IMAGE_NAME:$IMAGE_TAG
 workflows:
   version: 2
@@ -44,10 +46,10 @@ workflows:
       - build:
           filters:
             branches:
-              only: main
+              only: master
       - publish-latest:
           requires:
             - build
           filters:
             branches:
-              only: main
+              only: master
